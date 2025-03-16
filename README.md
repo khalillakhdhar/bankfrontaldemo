@@ -11,7 +11,7 @@ transaction: emetteur et recepteur (nullable)
  ### interceptors:
  une couche d'interception qui envoie le token du localstorage au backend avec chaque demande
  # modules:
- 1- auth module (login+subscribe) module + routage
+ 1- auth module (login) module + routage
  2- admin: 
       a- user: gestion des utilisateurs  verouillage des comptes supression recherche chat avec le user (consultation de profile details)
       b- transaction: supervision et annulation (changement d'état) fraud passage de transaction (historique indiv)
