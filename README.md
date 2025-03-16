@@ -1,59 +1,40 @@
-# Bankfrontaldemo
+# planification:
+## model: 
+utilisateur , role, compte , transaction
+utilisateur : many compte et many roles
+compte: plusieurs transactions
+transaction: emetteur et recepteur (nullable)
+## service:
+ crud endpoint 
+ ## Auth guard : 
+ sécuriser les accés aux modules: client et admin (par existance du token+ verification de role)
+ ### interceptors:
+ une couche d'interception qui envoie le token du localstorage au backend avec chaque demande
+ # modules:
+ 1- auth module (login+subscribe) module + routage
+ 2- admin: 
+      a- user: gestion des utilisateurs  verouillage des comptes supression recherche chat avec le user (consultation de profile details)
+      b- transaction: supervision et annulation (changement d'état) fraud passage de transaction (historique indiv)
+      c- comptes: association des comptes au utilisateurs la desactivation le filtrage (historique individuel)
+      d-gestion profile: update profile
+3- client:
+  a- gestion profile: update ou delete profile
+  b-consultation et historique du comptes
+  c-historique indiv
+  d-passage de transaction
+# page layout :
+header+ (menu)
+footer : fixe
+## standalones:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.3.
+footer
+update profile
 
-## Development server
+historique indiv (transaction + compte)
+stats: user, transaction , compte
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
