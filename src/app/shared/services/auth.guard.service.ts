@@ -6,22 +6,16 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuardService {
-
-  constructor(private authService:AuthService,private router:Router) { }
-  canActivate(
-next: ActivatedRouteSnapshot,
-state: RouterStateSnapshot):boolean
+ constructor(private authService:AuthService,private router:Router) { }
+ canActivate(next:ActivatedRouteSnapshot,state:RouterStateSnapshot):boolean{
+  const isAuthenticated=this.authService.getToken();
+  const roles = this.authService.getUserRoles();
+  const expectedRoles = next.data['roles'];
+  if(!isAuthenticated || (expectedRoles && !roles.some((r: any)=>expectedRoles.includes(r)) ))
   {
-    const isAuthenticated=this.authService.getToken();
-    const roles=this.authService.getUserRoles();
-    const expectedRoles=next.data['roles'];
-    if(!isAuthenticated|| (expectedRoles && !roles.some(r=>expectedRoles.includes(r))))
-    {
-      this.router.navigate(['/auth']);
-      return false;
-    }
-    return true;
-
-
+    this.router.navigate(['/auth']);
+    return false;
   }
+  return true;
+ }
 }

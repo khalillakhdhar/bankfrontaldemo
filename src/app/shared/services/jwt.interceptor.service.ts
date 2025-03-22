@@ -7,19 +7,20 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class JwtInterceptorService {
-
-
-  constructor( private authService:AuthService) { }
-  intercept(request:HttpRequest<any>,next:HttpHandler):Observable<HttpEvent<any>>
-  {
+  constructor(private authService:AuthService) { }
+  intercept(request:HttpRequest<any>,next:HttpHandler):Observable<HttpEvent<any>>{
     const token=this.authService.getToken();
-    if(token){
+    if(token)
+    {
       request=request.clone({
         setHeaders:{
           Authorization:`Bearer ${token}`
         }
-      })
+      });
     }
     return next.handle(request);
+
   }
+
+
 }
