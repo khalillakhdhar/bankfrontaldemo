@@ -1,16 +1,10 @@
-import { BaseModel } from "./base-model";
-import { Fraud } from "./fraud";
-import { User } from "./user";
+import { BaseInterface } from "./base-interface";
+import { Compte } from "./compte";
 
-export interface Transaction  extends BaseModel{
+export interface Transaction  extends BaseInterface{
+    id: number;
+    montant: number;
+    source: Compte;
+    destination:Compte
 
-  description: string;
-  amount: number;
-  date: Date;
-  status: string;
-  destinationIban: string;
-  sourceIban: string;
-  type: string;
-  user:User;
-  fraud: Fraud;
 }
