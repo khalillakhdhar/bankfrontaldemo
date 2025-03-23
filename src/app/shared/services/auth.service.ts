@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   apiUrl="http://localhost:8080/utilisateurs/login";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
   login(credentials:{userName:string,password:string}):Observable<any>{
    return this.http.post(this.apiUrl,credentials);
   }
@@ -28,5 +29,10 @@ export class AuthService {
     const roles= localStorage.getItem("userRoles");
     return roles?JSON.parse(roles):[];
   }
+logout(){
+  localStorage.clear();
+  // redirect to login page
+  this.router.navigate(["/auth"]);
 
+}
 }
