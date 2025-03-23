@@ -10,11 +10,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   credentials={userName:'',password:''};
+  message='';
   constructor(private authService:AuthService,private router:Router){}
   onSubmit()
   {
+    console.log("authentification",this.credentials);
     this.authService.login(this.credentials).subscribe(
     (response)=>{
+      if(!response.token)
+      {
+        this.message="compte non reconnu!";
+        return;
+      }
       this.authService.saveToken(response.token);
       this.authService.saveUserRoles(response.roles);
      const roles=this.authService.getUserRoles();
@@ -28,6 +35,7 @@ export class LoginComponent {
       }
       else
       {
+        this.message="compte non reconnu!"
         this.router.navigate(['/auth']);
       }
     }

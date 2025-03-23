@@ -1,1 +1,39 @@
-<p>login works!</p>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5">
+        <div class="card-header">
+          <h4>Login</h4>
+        </div>
+        <div class="card-body">
+          <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="credentials.userName" #email="ngModel" required>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                <div>
+                  Email correcte requis
+                </div>
+                </div>
+
+              </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" required>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                <div>
+                  Mot de passe correcte requis
+                </div>
+                </div>
+
+              </div>
+
+            <button [disabled]="myForm.invalid" type="submit" class="btn btn-primary">Login</button>
+            <h3>{{message}}</h3>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
